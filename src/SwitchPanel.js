@@ -40,7 +40,7 @@ SwitchPanel.propTypes = {
 
 const dispatchActions = (dispatch) => {
     return {
-        selectAnswer: (answer, select) => dispatch(Actions.selectAnswer(answer, select))
+        selectAnswer: (answerId, select) => dispatch(Actions.selectAnswer(answerId, select))
     };
 };
 

@@ -4,7 +4,8 @@ const initialState = {
     allAnswers: [],
     selectedAnswers: [],
     question: "",
-    editMode: false
+    editMode: false,
+    numberOfCorrectAnswers: 0
 };
 
 export function reducer(state = initialState, action) {
@@ -13,14 +14,21 @@ export function reducer(state = initialState, action) {
     }
     switch(action.type)  {
         case ADD_ANSWER: {
-            let obj = {allAnswers: [...state.allAnswers, action.answer]};
+            let obj = {
+                allAnswers: [...state.allAnswers, action.answer],
+                numberOfCorrectAnswers: action.answer.isAnswer? state.numberOfCorrectAnswers + 1 : state.numberOfCorrectAnswers
+            };
             return Object.assign({}, state, obj);
         }
 
         case EDIT_ANSWER: {
             let index = state.allAnswers.findIndex((answer) => answer.id === action.answer.id);
-            state.allAnswers[index] =  Object.assign({}, state.allAnswers[index], action.answer);
-            return Object.assign({}, state, { allAnswers: state.allAnswers });
+            state.allAnswers[index] = Object.assign({}, state.allAnswers[index], action.answer);
+            let obj = {
+                allAnswers: state.allAnswers,
+                numberOfCorrectAnswers: action.answer.isAnswer? state.numberOfCorrectAnswers + 1 : state.numberOfCorrectAnswers
+            };
+            return Object.assign({}, state, obj);
         }
 
         case REMOVE_ANSWER: {
@@ -32,12 +40,13 @@ export function reducer(state = initialState, action) {
         }
 
         case SELECT_ANSWER: {
-            if (action.selected === true) {
-                console.log(action);
+            let answers = [];
+            if (action.select === false) {
+                answers = state.selectedAnswers.filter((answer) => answer !== action.answer);
             } else {
-                console.log(action);
+                answers = Array.from(state.selectedAnswers);
+                answers.push(action.answer);
             }
-            let answers = Array.from(state.selectedAnswers);
             return Object.assign({}, state, {selectedAnswers: answers});
         }
 

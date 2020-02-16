@@ -7,6 +7,11 @@ import AnswerPanel from "./AnswerPanel";
 
 class App extends React.Component {
 
+    state = {
+        displayMessage: false,
+        pass: false
+    };
+
     constructor(props) {
         super(props);
         this.edit = this.edit.bind(this);
@@ -15,6 +20,8 @@ class App extends React.Component {
         this.captureQuestion = this.captureQuestion.bind(this);
         this.deleteAnswer = this.deleteAnswer.bind(this);
         this.evaluateAnswer = this.evaluateAnswer.bind(this);
+        this.displayMessage = this.displayMessage.bind(this);
+        this.hideMessage = this.hideMessage.bind(this);
     }
 
     displayEditor() {
@@ -36,7 +43,12 @@ class App extends React.Component {
                         <div className="field">
                             <label className="label">Otazka</label>
                             <div className="control">
-                                <input className="input" type="text" placeholder="Otazka" defaultValue={this.props.question} onKeyPress={this.captureQuestion} />
+                                <input className="input"
+                                       type="text"
+                                       placeholder="Otazka"
+                                       defaultValue={this.props.question}
+                                       onKeyPress={this.captureQuestion}
+                                />
                             </div>
                         </div>
                     </div>
@@ -56,14 +68,18 @@ class App extends React.Component {
                     <div className="column is-two-thirds">
                         <div className="columns is-multiline">
                             {this.renderQuestionAnswers()}
-                            <div className="column">
-                                <button onClick={this.addAnswer}>
-                                    <span className="icon is-large">
-                                        <i className="fas fa-2x fa-plus" />
-                                    </span>
-                                </button>
-                            </div>
                         </div>
+                    </div>
+                    <div className="column"> </div>
+                </div>
+                <div className="columns">
+                    <div className="column"> </div>
+                    <div className="column is-two-thirds">
+                        <button onClick={this.addAnswer}>
+                            <span className="icon is-large">
+                                <i className="fas fa-2x fa-plus" />
+                            </span>
+                        </button>
                     </div>
                     <div className="column"> </div>
                 </div>
@@ -94,15 +110,63 @@ class App extends React.Component {
         });
     }
 
+    hideMessage() {
+        this.setState({ displayMessage: false });
+    }
+
     evaluateAnswer() {
-        this.props.selectedAnswers.forEach((answer) =>
-            console.log(answer)
+        if (this.props.numberOfCorrectAnswers === 0) {
+            return;
+        }
+
+        let isCorrect = true;
+        if (this.props.selectedAnswers.length === this.props.numberOfCorrectAnswers) {
+            this.props.selectedAnswers.forEach((selectedAnswer) => {
+            const answer = this.props.allAnswers.find((item) => selectedAnswer === item.key);
+                if (answer !== undefined && !answer.isAnswer) {
+                    isCorrect = false;
+                }
+            });
+        } else {
+            isCorrect = false;
+        }
+        this.setState({ displayMessage: true, pass: isCorrect });
+    }
+
+    displayMessage() {
+        const pass = this.state.pass;
+        let image, alt, buttonLabel;
+        if (pass) {
+            image = "/success-baby.gif";
+            alt = "You did it!";
+            buttonLabel = "Done";
+        } else {
+            image = "/oh-hell-no.webp";
+            alt = "Nope.";
+            buttonLabel = "Try again";
+        }
+
+        return (
+            <div className="modal is-active">
+                <div className="modal-background"> </div>
+                <div className="modal-content">
+                    <p className="image is-4by3">
+                        <img src={image} alt={alt} />
+                    </p>
+                    <div style={{ textAlign: "center", paddingTop: 20 }}>
+                        <button className="button is-primary is-large" onClick={this.hideMessage}> {buttonLabel} </button>
+                    </div>
+                </div>
+                <button className="modal-close is-large" onClick={this.hideMessage} aria-label="close"> </button>
+            </div>
         );
     }
 
     displayQuestion() {
+        const disabled = this.props.numberOfCorrectAnswers > 0 ? "is-info" : "is-disabled";
         return (
             <React.Fragment>
+                {this.state.displayMessage ? this.displayMessage() : "" }
                 <div className="columns">
                     <div className="column"> </div>
                     <div className="column is-two-thirds">
@@ -128,7 +192,9 @@ class App extends React.Component {
                                 <i className="fas fa-2x fa-cogs" />
                             </span>
                         </button>
-                        <button className="button is-large is-info is-pulled-right" onClick={this.evaluateAnswer}>
+                        <button className={`button is-large is-pulled-right ${disabled}`}
+                                disabled={this.props.numberOfCorrectAnswers > 0}
+                                onClick={this.evaluateAnswer}>
                             Vyhodnot
                         </button>
                     </div>
@@ -157,7 +223,8 @@ function mapStateToProps(state) {
         editMode: state.editMode,
         allAnswers: state.allAnswers,
         selectedAnswers: state.selectedAnswers,
-        question: state.question
+        question: state.question,
+        numberOfCorrectAnswers: state.numberOfCorrectAnswers
     };
 }
 

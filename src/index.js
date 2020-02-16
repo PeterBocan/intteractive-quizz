@@ -17,7 +17,8 @@ const persistConfig = {
 
 // let persistedReducer = persistReducer(persistConfig, reducer);
 let persistedReducer = reducer;
-let store = createStore(persistedReducer);
+let store = createStore(persistedReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 let persistor = persistStore(store);
 /**
  *  <PersistGate loading={null} persistor={persistor}>

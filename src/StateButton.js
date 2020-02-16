@@ -27,7 +27,8 @@ export default class StateButton extends React.Component
     render()
     {
         return (
-          <button onClick={this.changeState} className={(this.isSelected())? "button is-large is-primary answer-button" : "button is-large answer-button"}>
+          <button onClick={this.changeState} className={(this.isSelected())?
+                   "button is-large is-primary answer-button" : "button is-large answer-button"}>
               {this.props.label}
           </button>
         );

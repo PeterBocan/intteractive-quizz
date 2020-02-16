@@ -5,7 +5,8 @@ import * as Actions from './ActionTypes';
  class AnswerPanel extends React.Component
 {
     state = {
-        isAnswer: false
+        isAnswer: false,
+        answer: {}
     };
 
     constructor(props) {
@@ -14,12 +15,14 @@ import * as Actions from './ActionTypes';
         this.deleteAnswer = this.deleteAnswer.bind(this);
         this.markAsAnswer = this.markAsAnswer.bind(this);
         this.state.isAnswer = this.props.answer.isAnswer;
+        this.state.answer = this.props.answer;
     }
 
     editAnswer(event) {
         let newAnswer = Object.assign({}, this.props.answer);
         newAnswer.text = event.target.value;
         this.props.editAnswer(newAnswer);
+        this.setState({ answer: newAnswer });
     }
 
     deleteAnswer() {
@@ -27,8 +30,9 @@ import * as Actions from './ActionTypes';
     }
 
     markAsAnswer() {
-        let newAnswer = Object.assign({}, this.props.answer);
+        let newAnswer = {...this.state.answer};
         newAnswer.isAnswer = !newAnswer.isAnswer;
+        console.log(newAnswer);
         this.props.editAnswer(newAnswer);
         this.setState({ isAnswer: true });
     }
