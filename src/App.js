@@ -3,7 +3,8 @@ import './App.css';
 import * as ReactRedux from 'react-redux';
 import * as Actions from './ActionTypes';
 import SwitchPanel from "./SwitchPanel";
-import AnswerPanel from "./AnswerPanel";
+import Editor from "./Editor";
+import GateEditor from "./GateEditor";
 
 class App extends React.Component {
 
@@ -14,101 +15,29 @@ class App extends React.Component {
 
     constructor(props) {
         super(props);
-        this.edit = this.edit.bind(this);
-        this.addAnswer = this.addAnswer.bind(this);
-        this.renderQuestionAnswers = this.renderQuestionAnswers.bind(this);
-        this.captureQuestion = this.captureQuestion.bind(this);
         this.deleteAnswer = this.deleteAnswer.bind(this);
         this.evaluateAnswer = this.evaluateAnswer.bind(this);
         this.displayMessage = this.displayMessage.bind(this);
         this.hideMessage = this.hideMessage.bind(this);
+        this.toggleEdit = this.toggleEdit.bind(this);
+    }
+
+    toggleEdit() {
+        this.props.toggleEdit(!this.props.editMode);
     }
 
     displayEditor() {
         return (
-            <React.Fragment>
-                <div className="columns">
-                    <div className="column"> </div>
-                    <div className="column is-two-thirds"> </div>
-                    <div className="column">
-                        <button className="button is-link" onClick={this.edit}>
-                            <i className="icon fas fa-times"> </i>
-                        </button>
-                    </div>
-                </div>
-
-                <div className="columns">
-                    <div className="column"> </div>
-                    <div className="column is-two-thirds">
-                        <div className="field">
-                            <label className="label">Otazka</label>
-                            <div className="control">
-                                <input className="input"
-                                       type="text"
-                                       placeholder="Otazka"
-                                       defaultValue={this.props.question}
-                                       onKeyPress={this.captureQuestion}
-                                />
-                            </div>
-                        </div>
-                    </div>
-                    <div className="column"> </div>
-                </div>
-
-                <div className="columns">
-                   <div className="column"> </div>
-                   <div className="column is-two-thirds">
-                       <p>Odpovede</p>
-                   </div>
-                   <div className="column"> </div>
-                </div>
-
-                <div className="columns">
-                    <div className="column"> </div>
-                    <div className="column is-two-thirds">
-                        <div className="columns is-multiline">
-                            {this.renderQuestionAnswers()}
-                        </div>
-                    </div>
-                    <div className="column"> </div>
-                </div>
-                <div className="columns">
-                    <div className="column"> </div>
-                    <div className="column is-two-thirds">
-                        <button onClick={this.addAnswer}>
-                            <span className="icon is-large">
-                                <i className="fas fa-2x fa-plus" />
-                            </span>
-                        </button>
-                    </div>
-                    <div className="column"> </div>
-                </div>
-            </React.Fragment>
+           <GateEditor>
+               <Editor />
+           </GateEditor>
         );
-    }
-
-    captureQuestion(e) {
-        this.props.onEditQuestion(e.target.value);
-    }
-
-    addAnswer() {
-        let key = (Math.random()*1e64).toString(30);
-        this.props.onAddAnswer({ id: this.props.allAnswers.length, text: "", isAnswer: false, key });
-    }
-
-    edit() {
-        this.props.toggleEdit(!this.props.editMode);
     }
 
     deleteAnswer(id) {
         this.props.onDeleteAnswer(id);
     }
 
-    renderQuestionAnswers() {
-        return this.props.allAnswers.map((answer) => {
-            return <AnswerPanel answer={answer} key={answer.key} />;
-        });
-    }
 
     hideMessage() {
         this.setState({ displayMessage: false });
@@ -187,13 +116,12 @@ class App extends React.Component {
                 <div className="columns submit-panel">
                     <div className="column"> </div>
                     <div className="column is-two-thirds">
-                        <button className="button is-link is-outlined is-large is-pulled-left" onClick={this.edit}>
+                        <button className="button is-link is-outlined is-large is-pulled-left" onClick={this.toggleEdit}>
                             <span className="icon is-large">
                                 <i className="fas fa-2x fa-cogs" />
                             </span>
                         </button>
                         <button className={`button is-large is-pulled-right ${disabled}`}
-                                disabled={this.props.numberOfCorrectAnswers > 0}
                                 onClick={this.evaluateAnswer}>
                             Vyhodnot
                         </button>

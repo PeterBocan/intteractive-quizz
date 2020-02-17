@@ -1,11 +1,20 @@
-import {ACTION_EDIT, ADD_ANSWER, EDIT_ANSWER, EDIT_QUESTION, SELECT_ANSWER, REMOVE_ANSWER} from "./ActionTypes";
+import {
+    ACTION_EDIT,
+    ADD_ANSWER,
+    EDIT_ANSWER,
+    EDIT_QUESTION,
+    SELECT_ANSWER,
+    REMOVE_ANSWER,
+    UNLOCK_EDITOR
+} from "./ActionTypes";
 
 const initialState = {
     allAnswers: [],
     selectedAnswers: [],
     question: "",
     editMode: false,
-    numberOfCorrectAnswers: 0
+    numberOfCorrectAnswers: 0,
+    unlockedEditor: false
 };
 
 export function reducer(state = initialState, action) {
@@ -57,6 +66,10 @@ export function reducer(state = initialState, action) {
 
         case ACTION_EDIT: {
             return Object.assign({}, state, { editMode: action.edit });
+        }
+
+        case UNLOCK_EDITOR: {
+            return Object.assign({}, state, { unlockedEditor: true });
         }
 
         default:

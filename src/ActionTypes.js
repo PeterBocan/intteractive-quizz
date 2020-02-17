@@ -7,7 +7,7 @@ export const EDIT_QUESTION = "EDIT_QUESTION";
 export const EDIT_ANSWER = "EDIT_ANSWER";
 
 export const ACTION_EDIT = "ACTION_EDIT";
-export const ACTION_ANSWER = "ACTION_ANSWER";
+export const UNLOCK_EDITOR = "UNLOCK_EDITOR";
 
 export function addAnswer(answer) {
     return { type: ADD_ANSWER, answer };
@@ -35,4 +35,8 @@ export function editQuestion(question) {
 
 export function toggleEdit(edit) {
     return { type: ACTION_EDIT, edit };
+}
+
+export function unlockEditor() {
+    return { type: UNLOCK_EDITOR };
 }
