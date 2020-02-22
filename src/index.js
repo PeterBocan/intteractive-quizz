@@ -17,23 +17,19 @@ const persistConfig = {
     storage
 };
 
-// let persistedReducer = persistReducer(persistConfig, reducer);
-let persistedReducer = reducer;
-
+let persistedReducer = persistReducer(persistConfig, reducer);
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 let store = createStore(persistedReducer,
     composeEnhancer(applyMiddleware(thunk))
 );
 let persistor = persistStore(store);
-/**
- *  <PersistGate loading={null} persistor={persistor}>
- *
- *      </PersistGate>
- */
+
 render(
     <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
            <App />
+        </PersistGate>
     </Provider>,
     document.getElementById('root'));
 
