@@ -11,6 +11,7 @@ class Editor extends React.Component
         this.toggleEdit = this.toggleEdit.bind(this);
         this.addAnswer = this.addAnswer.bind(this);
         this.captureQuestion = this.captureQuestion.bind(this);
+        this.handleSave = this.handleSave.bind(this);
     }
 
     toggleEdit() {
@@ -30,6 +31,11 @@ class Editor extends React.Component
 
     captureQuestion(e) {
         this.props.onEditQuestion(e.target.value);
+    }
+
+    handleSave() {
+        console.log("Hello");
+        this.props.saveQuestion(this.props.state);
     }
 
     render() {
@@ -91,6 +97,15 @@ class Editor extends React.Component
                     </div>
                     <div className="column"> </div>
                 </div>
+                <div className="columns">
+                    <div className="column is-two-thirds"> </div>
+                    <div className="column"> </div>
+                    <div className="column">
+                        <button className="button is-active is-primary is-large" onClick={() => this.handleSave()}>
+                            Save
+                        </button>
+                    </div>
+                </div>
             </React.Fragment>
         );
     }
@@ -102,7 +117,8 @@ function mapStateToProps(state) {
         allAnswers: state.allAnswers,
         selectedAnswers: state.selectedAnswers,
         question: state.question,
-        numberOfCorrectAnswers: state.numberOfCorrectAnswers
+        numberOfCorrectAnswers: state.numberOfCorrectAnswers,
+        state: state
     };
 }
 
@@ -122,10 +138,11 @@ function mapDispatchToProps(dispatch) {
         },
         toggleEdit: edit => {
             dispatch(Actions.toggleEdit(edit));
+        },
+        saveQuestion: (data) => {
+            dispatch(Actions.sendData(data));
         }
     };
 }
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(Editor);
-

@@ -3,11 +3,13 @@ import { render } from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
 import { reducer } from './Reducer';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
+import thunk from "redux-thunk";
+
 import { PersistGate } from 'redux-persist/integration/react';
 
 const persistConfig = {
@@ -17,8 +19,12 @@ const persistConfig = {
 
 // let persistedReducer = persistReducer(persistConfig, reducer);
 let persistedReducer = reducer;
+
+const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 let store = createStore(persistedReducer,
-    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+    composeEnhancer(applyMiddleware(thunk))
+);
 let persistor = persistStore(store);
 /**
  *  <PersistGate loading={null} persistor={persistor}>

@@ -2,12 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3ef9575-81c1-4d1c-a042-8ea049d73f39" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Editor.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/GateEditor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/question.json" beforeDir="false" afterPath="$PROJECT_DIR$/server/question.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ActionTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/ActionTypes.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Editor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Editor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/GateEditor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/GateEditor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Reducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SwitchPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/SwitchPanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,7 +42,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/server" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
@@ -42,6 +50,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
   </component>
   <component name="RunManager" selected="npm.npm start">
     <configuration name="Debug Application" type="JavascriptDebugType" uri="http://localhost:3000">
@@ -85,7 +94,10 @@
       <workItem from="1580674703098" duration="15147000" />
       <workItem from="1581796552103" duration="21199000" />
       <workItem from="1581867539405" duration="6773000" />
-      <workItem from="1581966292624" duration="5932000" />
+      <workItem from="1581966292624" duration="6367000" />
+      <workItem from="1582053420344" duration="7820000" />
+      <workItem from="1582228979429" duration="4427000" />
+      <workItem from="1582324847627" duration="20099000" />
     </task>
     <servers />
   </component>
@@ -106,10 +118,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="2687" y="847" width="424" height="484" key="FileChooserDialogImpl" timestamp="1581975236639">
+    <state x="2687" y="847" width="424" height="484" key="FileChooserDialogImpl" timestamp="1582063287014">
       <screen x="67" y="27" width="3773" height="2133" />
     </state>
-    <state x="2687" y="847" width="424" height="484" key="FileChooserDialogImpl/67.27.3773.2133@67.27.3773.2133" timestamp="1581975236639" />
+    <state x="2687" y="847" width="424" height="484" key="FileChooserDialogImpl/67.27.3773.2133@67.27.3773.2133" timestamp="1582063287014" />
     <state width="1973" height="502" key="GridCell.Tab.0.bottom" timestamp="1581797399524">
       <screen x="67" y="27" width="3773" height="2133" />
     </state>
@@ -126,30 +138,19 @@
       <screen x="67" y="27" width="3773" height="2133" />
     </state>
     <state width="1973" height="502" key="GridCell.Tab.0.right/67.27.3773.2133@67.27.3773.2133" timestamp="1581797399524" />
-    <state x="504" y="172" width="979" height="729" key="find.popup" timestamp="1580072324812">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state x="1199" y="336" width="2199" height="1515" key="find.popup" timestamp="1582405204284">
+      <screen x="67" y="27" width="3773" height="2133" />
     </state>
     <state x="504" y="172" width="979" height="729" key="find.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1580072324812" />
+    <state x="1199" y="336" width="2199" height="1515" key="find.popup/67.27.3773.2133@67.27.3773.2133" timestamp="1582405204284" />
     <state x="499" y="248" key="run.anything.popup" timestamp="1579350415443">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
     <state x="499" y="248" key="run.anything.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1579350415443" />
-    <state x="1188" y="498" width="1505" height="1404" key="search.everywhere.popup" timestamp="1581975141078">
+    <state x="1188" y="498" width="1505" height="1404" key="search.everywhere.popup" timestamp="1582406282678">
       <screen x="67" y="27" width="3773" height="2133" />
     </state>
     <state x="499" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027@0.23.1680.1027" timestamp="1581279941524" />
-    <state x="1188" y="498" width="1505" height="1404" key="search.everywhere.popup/67.27.3773.2133@67.27.3773.2133" timestamp="1581975141078" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/src/App.js</url>
-          <line>112</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <state x="1188" y="498" width="1505" height="1404" key="search.everywhere.popup/67.27.3773.2133@67.27.3773.2133" timestamp="1582406282678" />
   </component>
 </project>

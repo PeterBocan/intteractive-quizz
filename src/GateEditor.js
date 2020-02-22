@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import * as Actions from "./ActionTypes";
+import PropTypes from "prop-types";
 
 const magic = "9f86d081884c7d659a2feaa0c55ad015a3bf4f1b2b0b822cd15d6c15b0f00a08";
 
@@ -17,7 +18,7 @@ class GateEditor extends React.Component
 
     constructor(props) {
         super(props);
-        this.state.unlock = this.props.unlockedEditor;
+        this.state.unlock = this.props.unlockedSite;
         this.updateMagic = this.updateMagic.bind(this);
         this.setState = this.setState.bind(this);
     }
@@ -25,7 +26,7 @@ class GateEditor extends React.Component
     updateMagic(event) {
         sha256digest(event.target.value).then(result => {
             if (result === magic) {
-                this.props.unlockEditor();
+                this.props.unlockSite();
                 this.setState({ unlock: true });
             }
         });
@@ -33,6 +34,7 @@ class GateEditor extends React.Component
 
     render() {
         if (this.state.unlock) {
+            this.props.onUnlock();
             return (
                 <div>
                     {this.props.children}
@@ -40,32 +42,39 @@ class GateEditor extends React.Component
             );
         } else {
             return (
-                <div className="columns">
-                    <div className="column"> </div>
-                    <div className="column is-two-thirds">
-                        <p>Please enter a password</p><br />
-                        <div className="field has-addons">
-                            <div className="control answer-input">
-                                <input className="input" type="text" onKeyUp={this.updateMagic} />
+                <React.Fragment>
+                    <br />
+                    <div className="columns">
+                        <div className="column"> </div>
+                        <div className="column is-two-thirds">
+                            <p>Please enter a password</p><br />
+                            <div className="field has-addons">
+                                <div className="control answer-input">
+                                    <input className="input" type="text" onKeyUp={this.updateMagic} />
+                                </div>
                             </div>
                         </div>
+                        <div className="column"> </div>
                     </div>
-                    <div className="column"> </div>
-                </div>
+                </React.Fragment>
             );
         }
     }
 }
 
+GateEditor.propTypes = {
+    onUnlock: PropTypes.func
+}
+
 function mapStateToProps(state) {
     return {
-        unlockedEditor: state.unlockEditor
+        unlockedSite: state.unlockSite
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-       unlockEditor: () => dispatch(Actions.unlockEditor())
+       unlockSite: () => dispatch(Actions.unlockSite())
     };
 }
 

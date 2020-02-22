@@ -20,6 +20,7 @@ class App extends React.Component {
         this.displayMessage = this.displayMessage.bind(this);
         this.hideMessage = this.hideMessage.bind(this);
         this.toggleEdit = this.toggleEdit.bind(this);
+        this.fetchQuestionaire = this.fetchQuestionaire.bind(this);
     }
 
     toggleEdit() {
@@ -28,16 +29,13 @@ class App extends React.Component {
 
     displayEditor() {
         return (
-           <GateEditor>
-               <Editor />
-           </GateEditor>
+           <Editor />
         );
     }
 
     deleteAnswer(id) {
         this.props.onDeleteAnswer(id);
     }
-
 
     hideMessage() {
         this.setState({ displayMessage: false });
@@ -132,16 +130,22 @@ class App extends React.Component {
         );
     }
 
+    fetchQuestionaire() {
+        Actions.fetchData();
+    }
+
     render() {
         return (
-            <section className="App section">
-                {this.props.editMode? this.displayEditor() : this.displayQuestion()}
+            <GateEditor onUnlock={() => this.fetchQuestionaire()}>
+                <section className="App section">
+                    {this.props.editMode? this.displayEditor() : this.displayQuestion()}
 
-                <div className="columns fixed-panel">
-                    <div className="column"> </div>
-                    <div className="column is-two-thirds"> </div>
-                </div>
-            </section>
+                    <div className="columns fixed-panel">
+                        <div className="column"> </div>
+                        <div className="column is-two-thirds"> </div>
+                    </div>
+                </section>
+            </GateEditor>
         );
     }
 }
@@ -172,7 +176,7 @@ function mapDispatchToProps(dispatch) {
         },
         toggleEdit: edit => {
             dispatch(Actions.toggleEdit(edit));
-        }
+        },
     };
 }
 

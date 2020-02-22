@@ -5,7 +5,9 @@ import {
     EDIT_QUESTION,
     SELECT_ANSWER,
     REMOVE_ANSWER,
-    UNLOCK_EDITOR
+    UNLOCK_SITE,
+    FETCH_DATA,
+    POST_DATA
 } from "./ActionTypes";
 
 const initialState = {
@@ -14,7 +16,7 @@ const initialState = {
     question: "",
     editMode: false,
     numberOfCorrectAnswers: 0,
-    unlockedEditor: false
+    unlockedQuestionaire: false
 };
 
 export function reducer(state = initialState, action) {
@@ -68,8 +70,17 @@ export function reducer(state = initialState, action) {
             return Object.assign({}, state, { editMode: action.edit });
         }
 
-        case UNLOCK_EDITOR: {
-            return Object.assign({}, state, { unlockedEditor: true });
+        case UNLOCK_SITE: {
+            return Object.assign({}, state, { unlockedQuestionaire: true });
+        }
+
+        case FETCH_DATA: {
+            console.log(action);
+            return Object.assign( {}, state);
+        }
+
+        case POST_DATA: {
+            return state;
         }
 
         default:

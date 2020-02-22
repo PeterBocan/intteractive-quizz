@@ -1,24 +1,28 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const cors = require('cors');
 
 const app = express();
 const port = 3333;
-const magicToken = "something";
+const magicToken = "saveSomething";
 
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(cors());
 
-app.get('/', (req, res) => res.send(fs.readFileSync('./question.json')));
+app.get('/', (req, res) => {
+    res.json(fs.readFileSync('./question.json'));
+});
+
 app.post('/', (req, res) => {
-    if (req.body.magicToken !== magicToken) {
-        res.send(JSON.stringify({ status: "Not permitted."} ));
+    if (req.query.token !== magicToken) {
+        res.json({ status: "Not permitted."});
         return;
     }
-    delete req.body.magicToken;
+    console.log(req.body);
     fs.writeFileSync("./question.json", JSON.stringify(req.body));
-    res.send(JSON.stringify({ status: "ok" }));
+    res.json({ status: "ok" });
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}`));
-
-

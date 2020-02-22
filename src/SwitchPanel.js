@@ -1,6 +1,5 @@
 import React from 'react';
 import StateButton from "./StateButton";
-import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import * as Actions from "./ActionTypes";
 
@@ -16,7 +15,7 @@ class SwitchPanel extends React.Component {
     }
 
     renderAnswers() {
-        return this.props.answers.map((answer) => {
+        return this.props.allAnswers.map((answer) => {
             return (
                 <div key={answer.key} className="column is-one-quarter">
                     <StateButton label={answer.text} onStateChanged={(selected) => this.selectAnswer(answer, selected)} />
@@ -34,16 +33,16 @@ class SwitchPanel extends React.Component {
     }
 }
 
-SwitchPanel.propTypes = {
-    answers: PropTypes.array.isRequired
-};
-
 const dispatchActions = (dispatch) => {
     return {
         selectAnswer: (answerId, select) => dispatch(Actions.selectAnswer(answerId, select))
     };
 };
 
-const mapStateToProps = (state) => {};
+function mapStateToProps (state) {
+   return {
+       allAnswers: state.allAnswers
+   };
+}
 
 export default connect(mapStateToProps, dispatchActions)(SwitchPanel);
