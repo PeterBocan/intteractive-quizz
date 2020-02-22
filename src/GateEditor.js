@@ -64,7 +64,7 @@ class GateEditor extends React.Component
 
 GateEditor.propTypes = {
     onUnlock: PropTypes.func
-}
+};
 
 function mapStateToProps(state) {
     return {

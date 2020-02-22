@@ -4,7 +4,7 @@ const fs = require('fs');
 const cors = require('cors');
 
 const app = express();
-const port = 3333;
+const port = 8080;
 const magicToken = "saveSomething";
 
 app.use(bodyParser.urlencoded({ extended: true }));
