@@ -11,7 +11,7 @@ export const POST_DATA = "POST_DATA";
 export const ACTION_EDIT = "ACTION_EDIT";
 export const UNLOCK_SITE = "UNLOCK_SITE";
 
-const domain = "http://157.245.32.251/";
+const domain = "http://157.245.32.251";
 
 function dataLoadRequest() {
     return fetch(`${domain}/question`, {

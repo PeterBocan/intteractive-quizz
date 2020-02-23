@@ -23,7 +23,6 @@ app.post('/question', (req, res) => {
         res.json({ status: "Not permitted."});
         return;
     }
-    console.log(req.body);
     fs.writeFileSync("./question.json", JSON.stringify(req.body));
     res.json({ status: "ok" });
 });

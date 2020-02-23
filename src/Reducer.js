@@ -75,7 +75,6 @@ export function reducer(state = initialState, action) {
         }
 
         case FETCH_DATA: {
-            console.log(action);
             return Object.assign( {}, state);
         }
 
