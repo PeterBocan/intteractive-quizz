@@ -11,10 +11,10 @@ export const POST_DATA = "POST_DATA";
 export const ACTION_EDIT = "ACTION_EDIT";
 export const UNLOCK_SITE = "UNLOCK_SITE";
 
-const domain = "http://157.245.32.251:8080/";
+const domain = "http://157.245.32.251/";
 
 function dataLoadRequest() {
-    return fetch(`${domain}/`, {
+    return fetch(`${domain}/question`, {
         method: "GET",
         cache: "no-cache",
         redirect: "follow",
@@ -27,7 +27,7 @@ function dataLoadRequest() {
 
 function postDataRequest(data) {
     console.log(data);
-    return fetch(`${domain}/?token=saveSomething`, {
+    return fetch(`${domain}/question?token=saveSomething`, {
         method: "POST",
         cache: "no-cache",
         headers: {
