@@ -34,7 +34,6 @@ class Editor extends React.Component
     }
 
     handleSave() {
-        console.log("Hello");
         this.props.saveQuestion(this.props.state);
     }
 
@@ -58,10 +57,10 @@ class Editor extends React.Component
                             <label className="label">Otazka</label>
                             <div className="control">
                                 <input className="input"
-                                       type="text"
-                                       placeholder="Otazka"
-                                       defaultValue={this.props.question}
-                                       onKeyPress={this.captureQuestion}
+                                    type="text"
+                                    placeholder="Otazka"
+                                    defaultValue={this.props.question}
+                                    onKeyPress={this.captureQuestion}
                                 />
                             </div>
                         </div>

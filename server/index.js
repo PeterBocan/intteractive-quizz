@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const fs = require('fs');
 const cors = require('cors');
 const path = require('path');
+const https = require('https');
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -31,4 +32,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname + "/client/build/index.html"));
 });
 
-app.listen(port, () => console.log(`Example app listening on port ${port}`));
+https.createServer({
+    key: fs.readFileSync("./ssl/server.key"),
+    cert: fs.readFileSync("./ssl/server.cert"),
+}, app).listen(port, () => console.log(`Listening app on port ${port}`));

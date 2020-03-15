@@ -11,7 +11,7 @@ export const POST_DATA = "POST_DATA";
 export const ACTION_EDIT = "ACTION_EDIT";
 export const UNLOCK_SITE = "UNLOCK_SITE";
 
-const domain = "http://157.245.32.251";
+const domain = "https://pbocan.net";
 
 function dataLoadRequest() {
     return fetch(`${domain}/question`, {
@@ -26,8 +26,7 @@ function dataLoadRequest() {
 }
 
 function postDataRequest(data) {
-    console.log(data);
-    return fetch(`${domain}/question?token=saveSomething`, {
+      return fetch(`${domain}/question?token=saveSomething`, {
         method: "POST",
         cache: "no-cache",
         headers: {
